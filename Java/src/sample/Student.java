@@ -5,11 +5,21 @@ public class Student implements Comparable<Student> {
 	private int id;
 	private float gpa;
 
-	public Student(String name, float gpa) {
+	
+	
+	public Student(String record) {
+		String[] data = record.split(" ");
+		this.name = data[0];
+		this.id = Integer.parseInt(data[1]);
+		this.gpa = Float.parseFloat(data[2]);
+	}
+	
+	public Student(String name, int id,  float gpa) {
 		this.name = name;
 		this.gpa = gpa;
+		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}

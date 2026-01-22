@@ -2,10 +2,13 @@
  * @author Hani Mohammed (Hani Badawy)
  */
 package App;
+
 import sample.Student;
+import util.Reader;
 import sample.NameComparator;
 import sample.GpaComparator;
 import sample.IdComparator;
+
 /**
  * 
  */
@@ -15,15 +18,32 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		//System.out.println(add(5, 10));
-		//System.out.println(add("Hello, ", "World!"));
-		
-		// Testing the student class
-		Student s1 = new Student("Alice", 3.5f);
-		Student s2 = new Student("Bob", 3.8f);
-		
-		//Create Comparators
+
+		// System.out.println(add(5, 10));
+		// System.out.println(add("Hello, ", "World!"));
+		// testComparison();
+		String filePath = Main.class.getResource("/students_data.txt").getPath();
+
+		Reader<Student> reader = new Reader<>(filePath, Student.class);
+		Object[] list = (Object[]) reader.readData();
+		Student[] students = new Student[list.length];
+		for (int i = 0; i < list.length; i++) {
+			students[i] = (Student) list[i];
+		}
+	}
+
+	public static String add(String a, String b) {
+		return a + b;
+	}
+
+	public static int add(int a, int b) {
+		return a + b;
+	}
+
+	private static void testComparison() {
+		// Create Comparators
+		Student s1 = new Student("Alice", 456, 3.5f);
+		Student s2 = new Student("Bob", 123, 3.8f);
 		NameComparator nameComparator = new NameComparator();
 		GpaComparator gpaComparator = new GpaComparator();
 		IdComparator idComparator = new IdComparator();
@@ -51,7 +71,7 @@ public class Main {
 		} else {
 			System.out.println(s1.getName() + " and " + s2.getName() + " have the same ID.");
 		}
-		
+
 		int comparison = s1.compareTo(s2);
 		if (comparison < 0) {
 			System.out.println(s1.getName() + " has a lower GPA than " + s2.getName());
@@ -60,16 +80,6 @@ public class Main {
 		} else {
 			System.out.println(s1.getName() + " has the same GPA as " + s2.getName());
 		}
-		
-		
-	}
-	
-	public static String add(String a, String b) {
-		return a + b;
-	}
-	
-	public static int add(int a, int b) {
-		return a + b;
 	}
 
 }
