@@ -6,6 +6,7 @@ package App;
 import sample.Student;
 import util.Reader;
 import sample.NameComparator;
+import algo.Sorter;
 import sample.GpaComparator;
 import sample.IdComparator;
 
@@ -25,13 +26,26 @@ public class Main {
 		String filePath = Main.class.getResource("/students_data.txt").getPath();
 
 		Reader<Student> reader = new Reader<>(filePath, Student.class);
-		Object[] list = (Object[]) reader.readData();
-		Student[] students = new Student[list.length];
-		for (int i = 0; i < list.length; i++) {
-			students[i] = (Student) list[i];
+		reader.readData();
+		Object[] objects = reader.getData();
+		Student[] students = new Student[objects.length];
+		for (int i = 0; i < objects.length; i++) {
+				print(objects[i]);
+				students[i] = objects[i] instanceof Student ? (Student) objects[i] : null;
+		}
+		
+		Sorter<Student> sorter = new Sorter<>();
+		sorter.selectionSort(students);
+		print("After Sorting:");
+		for (Object student : students) {
+			print(student);
 		}
 	}
-
+	
+	private static void print(Object obj) {
+		System.out.println(obj);
+	}
+	
 	public static String add(String a, String b) {
 		return a + b;
 	}

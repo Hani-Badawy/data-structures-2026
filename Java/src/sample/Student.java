@@ -46,12 +46,11 @@ public class Student implements Comparable<Student> {
 
 	@Override
 	public int compareTo(Student other) {
-		if (this.gpa < other.gpa) {
-			return -1;
-		} else if (this.gpa > other.gpa) {
-			return 1;
-		} else {
-			return 0;
-		}
+		return this.name.compareTo(other.name);
+	}
+
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", id=" + id + ", gpa=" + gpa + "]";
 	}
 }
