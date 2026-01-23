@@ -5,8 +5,6 @@ public class Student implements Comparable<Student> {
 	private int id;
 	private float gpa;
 
-	
-	
 	public Student(String record) {
 		String[] data = record.split(" ");
 		this.name = data[0];
@@ -53,4 +51,12 @@ public class Student implements Comparable<Student> {
 	public String toString() {
 		return "Student [name=" + name + ", id=" + id + ", gpa=" + gpa + "]";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return this.name.equals(((Student)obj).name);
+	}
+	
+	
+	
 }

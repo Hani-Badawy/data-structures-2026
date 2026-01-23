@@ -6,6 +6,7 @@ package App;
 import sample.Student;
 import util.Reader;
 import sample.NameComparator;
+import algo.Searcher;
 import algo.Sorter;
 import sample.GpaComparator;
 import sample.IdComparator;
@@ -37,8 +38,27 @@ public class Main {
 		Sorter<Student> sorter = new Sorter<>();
 		sorter.selectionSort(students);
 		print("After Sorting:");
+		int i = 0;
 		for (Object student : students) {
-			print(student);
+			print(i++ +" "+student);
+		}
+		
+		Student s1 = new Student("QuinnK", 2732, 2.69f);
+		Student s2 = new Student("YaraY", 2153, 2.92f);
+		int index = -1;
+		Searcher<Student> searcher = new Searcher<>();
+		index = searcher.linearSearch(students, s1);
+		if (index != -1) {
+			print("Student found at index " + index + ": " + students[index]);
+		} else {
+			print("Student not found: " + s1);
+		}	
+		
+		index = searcher.binarySearch(students, s2);
+		if (index != -1) {
+			print("Student found at index " + index + ": " + students[index]);
+		} else {
+			print("Student not found: " + s2);
 		}
 	}
 	
