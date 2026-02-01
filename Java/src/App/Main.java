@@ -6,8 +6,12 @@ package App;
 import sample.Student;
 import util.Reader;
 import sample.NameComparator;
+
+import java.util.Vector;
+
 import algo.Searcher;
 import algo.Sorter;
+import ds.Array;
 import sample.GpaComparator;
 import sample.IdComparator;
 
@@ -20,10 +24,17 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		// System.out.println(add(5, 10));
-		// System.out.println(add("Hello, ", "World!"));
-		// testComparison();
+		
+		Array<Integer> arr = new Array<>();
+		arr.add(10);
+		arr.add(20);
+		arr.add(30);
+		
+		
+		for (var item : arr) {
+			System.out.println(item);
+		}	
+		
 		String filePath = Main.class.getResource("/students_data.txt").getPath();
 
 		Reader<Student> reader = new Reader<>(filePath, Student.class);
