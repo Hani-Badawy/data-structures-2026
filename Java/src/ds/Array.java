@@ -3,25 +3,21 @@ package ds;
 import java.util.Iterator;
 
 public class Array<T> implements ResizableArray<T>, Iterable<T> {
-	
-	
-	
+
 	private Object[] elements;
 	private int count;
-	
-	
+
 	@Override
 	public Iterator<T> iterator() {
 		ArrayIterator<T> iterator = new ArrayIterator<>(this);
 		return iterator;
 	}
 
-	
 	public Array() {
-		elements = new Object[10];
+		elements = new Object[100];
 		count = 0;
 	}
-	
+
 	@Override
 	public void add(T element) {
 		if (count == elements.length) {
@@ -80,13 +76,12 @@ public class Array<T> implements ResizableArray<T>, Iterable<T> {
 		}
 		return sb.toString();
 	}
-	
+
 	public T get(int index) {
 		if (index < 0 || index >= count) {
 			throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + count);
 		}
 		return (T) elements[index];
 	}
-	
 
 }
