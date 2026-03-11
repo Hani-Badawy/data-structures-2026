@@ -7,11 +7,13 @@ import sample.Student;
 import util.Reader;
 import sample.NameComparator;
 
+import java.util.HashMap;
 import java.util.Vector;
 
 import algo.Searcher;
 import algo.Sorter;
 import ds.Array;
+import ds.Stack;
 import sample.GpaComparator;
 import sample.IdComparator;
 
@@ -71,6 +73,17 @@ public class Main {
 		} else {
 			print("Student not found: " + s2);
 		}
+		
+		
+		//test validation
+		String expression = "( { [  } )";
+		boolean isValid = validateExpression(expression);
+		if (isValid) {
+			print("The expression is valid.");
+		} else {
+			print("The expression is invalid.");
+		}
+		
 	}
 	
 	private static void print(Object obj) {
@@ -124,6 +137,32 @@ public class Main {
 			System.out.println(s1.getName() + " has a higher GPA than " + s2.getName());
 		} else {
 			System.out.println(s1.getName() + " has the same GPA as " + s2.getName());
+		}
+	}
+	
+	private static boolean validateExpression(String expression) {
+		HashMap<Character, Character> map = new HashMap<>();
+		map.put(')', '(');
+		map.put('}', '{');
+		map.put(']', '[');
+		map.put('>', '<');
+		Stack<Character> stack = new Stack<>();
+		
+		for (int i = 0; i < expression.length(); i++) {
+			char token = expression.charAt(i);
+			if (map.containsValue(token)) {
+				stack.push(token);
+			} else if (map.containsKey(token)) {
+				if (stack.isEmpty() || !stack.peek().equals(map.get(token))) {
+					return false;
+				}
+				stack.pop();
+			}
+		}
+		if (stack.isEmpty()) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
