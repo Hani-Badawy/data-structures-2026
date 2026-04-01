@@ -29,16 +29,17 @@ public class Queue<T> implements QueueADT<T> {
     }
 
     public T dequeue() throws Exception {
-        if(this.length==1)
-            reset();
+        T item;
         if (isEmpty()) {
             throw new Exception("Can't dequeue, the queue is empty");
         }
         else {
+        	item = data[front];
             front++;
         }
+        
         this.length = back - front + 1;
-        return data[front];
+        return item;
     }
     
     public T peek()
